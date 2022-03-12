@@ -1,0 +1,40 @@
+#draggable {
+    text-align: center;
+    background: transparent;
+  }
+
+  .dropzone {
+    width: 30px;
+    height: 180px;
+    background: transparent;
+    float: left;
+    padding: 10px;
+    border: black 3px solid;
+  }
+  .image{
+      height: 130px;
+  }
+  .footelements{
+      width: auto;
+  }
+  .footcontainer{
+    height: 40%;
+    width: 100%; 
+    float: left;
+  }
+.maincontainer{
+    height: 60%;
+    width: 100%; 
+    float: left;
+}
+
+.dropzone1 {
+    width: 106px;
+    height: 106px;
+    background: transparent;
+    border: black 3px solid;
+  }
+  .image1{
+    height: 100px;
+}
+

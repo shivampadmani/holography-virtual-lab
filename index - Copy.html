@@ -1,0 +1,674 @@
+<!DOCTYPE html> 
+<html> 
+<head>
+    <title>Hologram Experiment</title>
+    <link rel="stylesheet" type="text/css" href="css/accordion.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="css/draggable.css">
+	<link rel="stylesheet" type="text/css" href="css/slider.css">
+	
+</head>
+
+
+<body>
+
+
+ <canvas id="canvas" width="1200px" height="650px">
+	</canvas>
+
+<div style="font-weight:bold; font-size: 3em; position: absolute; left: 0px; top: 0px; height:10%; text-align: center; width:100%; background-color: aquamarine;  border: black 6px solid; ">
+	Hologram Experiment
+</div>
+
+<div style=" position: absolute; left:45%; left: 700px; top: 90px;">
+	<input type="button" onclick="start();" value="Start Animation" />
+</div>
+
+<div style="position: absolute; left: 1290px; top:150px;">
+	<input type="button" onclick="start1();" value="Start Experiment" />
+</div>
+
+<div id="tips_box" style="position: absolute; width:300px; height:300px; left:1210px; top: 200px; border: black 2px solid; font-weight: bold;">
+	<center>Tips Box</center>
+</div>
+
+<div class="nav-link">
+		<div class="nav-item nav-link">
+			<div style="left:585px; top:120px; position:absolute;">
+				<div class="rangeslider"> 
+					<input type="range" min="0" max="360" value="0"	class="myslider nav-item" id="slider1" oninput="rotate1();" >&nbsp;&nbsp;<span id="output1">Value:</span> 
+				</div>
+			</div>	
+			<div style="left:978px; top:120px; position:absolute;">
+				<div class="rangeslider"> 
+					<input type="range" min="0" max="360" value="0" class="myslider nav-item" id="slider2" oninput="rotate2();" >&nbsp;&nbsp;<span id="output2">Value:</span>
+				</div>
+			</div>
+			
+			<div style="left:585px; top:710px; position:absolute;">
+				<div class="rangeslider"> 
+					<input type="range" min="0" max="360" value="0" class="myslider nav-item" id="slider3" oninput="rotate3();" >&nbsp;&nbsp;<span id="output3">Value:</span>
+				</div>
+			</div>
+		</div>
+
+		<div style="left:775px; top:405px; position:absolute;">
+			<input type="button" onclick="reset();" value="Reset Sliders" class="btn-outline-dark btn-light align-content-between">
+		</div>	
+	</div>
+			
+
+<div class="page-content p-5" id="content">
+	<div>
+		<!--Image Section-->
+	<img src="images/shelf5.png" height="30%"style="left:100px; top:510px;  position:absolute; border: black 3px solid;">	
+	  <img src="images/laser.png" height="60px" style="left:300px; top:210px;  position:absolute; z-index: 1;">
+	  <!--Image Section End-->
+
+	  <!--Mirror Section Start-->
+			<div style="left:600px; top:150px; position: absolute;">
+				<div class="col">
+					<div class="dropzone" id="mirror1" onchange="change();">
+					1
+					</div>
+				</div>
+			</div>
+			<div style="left:993px; top:150px; position: absolute;">
+				<div class="col">
+					<div class="dropzone" id="mirror2" onchange="change1();">2
+					</div>
+				</div>
+			</div>
+		
+		
+			<div style="left:600px; top:522px; position: absolute;">
+				<div class="col">
+					<div class="dropzone" id="mirror3" onchange="change2();">3
+					</div>
+				</div>
+			</div>
+			
+			<div style="left:950px; top:379px; position: absolute;">
+				<div class="col">
+					<div class="dropzone1" id="object" onchange="change3();">
+					</div>
+				</div>
+			</div>
+			
+			<div style="left:950px; top:555px; position: absolute;">
+				<div class="col">
+					<div class="dropzone1" id="image_formed" style="border-width:0px">
+					</div>
+				</div>
+			</div>
+
+		<!--Mirror Section End-->
+	</div>
+	<!--Shelf Section Start-->
+	<div>
+		<div style="left:110px; top:535px;  position:absolute;">
+			<div class="col justify-content-md-center">
+				<div class="dropzone" >
+					<img id="draggable" name="m1" class="image" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)" src="images/mirror.png" height="45px">
+				</div>
+			</div>
+		</div>	
+		<div style="left:160px; top:535px;  position:absolute;">
+			<div class="col justify-content-md-center">
+				<div class="dropzone">
+					<img id="draggable" name="m2" class="image" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)" src="images/mirror.png" height="45px">
+				</div>
+			</div>
+		</div>
+		<div style="left:210px; top:535px;  position:absolute;">
+			<div class="col justify-content-md-center">
+				<div class="dropzone">
+					<img id="draggable" name="m3" class="image" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)" src="images/mirror.png" height="45px">
+				</div>
+			</div>
+		</div>
+		<div style="left:260px; top:535px;  position:absolute;">
+			<div class="col justify-content-md-center">
+				<div class="dropzone">
+					<img id="draggable" name="s1" class="image" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)" src="images/Splitter.jpg" height="45px">
+				</div>
+			</div>
+		</div>
+		<div style="left:310px; top:535px;  position:absolute;">
+			<div class="col justify-content-md-center">
+				<div class="dropzone">
+					<img id="draggable" name="s2" class="image" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)" src="images/Splitter.jpg" height="45px">
+				</div>
+			</div>
+		</div>	
+		<div style="left:270px; top:367px;  position:absolute;">
+			<div class="col justify-content-md-center">
+				<div class="dropzone1">
+					<img id="draggable" name="image_selected" class="image1" draggable="true" ondragstart="event.dataTransfer.setData('text/plain',null)" src="images/temp.jpg">
+				</div>
+			</div>	
+		</div>	
+	</div>
+	<!--Shelf Section End-->
+
+</div>
+	<div style="left:130px; top:490px;  position:absolute; font-weight: bold;">
+		M1
+	</div>
+	<div style="left:180px; top:490px;  position:absolute; font-weight: bold;">
+		M2
+	</div>
+	<div style="left:230px; top:490px;  position:absolute; font-weight: bold;">
+		M3
+	</div>
+	<div style="left:280px; top:490px;  position:absolute; font-weight: bold;">
+		S1
+	</div>
+	<div style="left:330px; top:490px;  position:absolute; font-weight: bold;">
+		S2
+	</div>	
+	<div style="left:230px; top:730px;  position:absolute; font-weight: bold;">
+		Shelf
+	</div>
+	<div style="left:280px; top:340px;  position:absolute; font-weight: bold;">
+		Object Selected
+	</div>
+	<div style="left:1100px; top:420px;  position:absolute; font-weight: bold;">
+		Object Placed
+	</div>
+	<div style="left:280px; top:340px;  position:absolute; font-weight: bold;">
+		Object Selected
+	</div>
+
+<div>
+
+</div>
+
+<!--Page Section End-->
+
+
+<!--<div class="vertical-nav bg-white" id="sidebar" style="border: black 6px solid;">
+  
+	<ul class="nav flex-column bg-white mb-0">
+	  <li class="nav-item">
+		<a href="#" class="nav-link text-dark font-italic bg-light">
+		  <i class="fa fa-th-large mr-3 text-primary fa-fw"></i>
+			  Home
+		 </a>
+	  </li>		  
+	</ul>
+
+</div>-->
+
+
+<!--script-->
+
+	<script src="js/animation.ob.js"></script>
+<script src="js/jquery-3.4.1.min.js"></script>
+<script src="js/draggable.js"></script>
+
+<script> 
+
+var anim = new Animation("canvas");
+var canvas = anim.getCanvas();
+var context = anim.getContext();
+
+// canvas.addEventListener("mousedown", getcoordinatates, false);
+// var on=1;
+//  function getcoordinatates(event)
+//  {
+//     var x = event.pageX;
+//     var y = event.pageY;
+//     x -= canvas.offsetLeft;
+// 	y -= canvas.offsetTop;
+// 	alert(x+" "+y);
+// }
+
+var div1 = document.getElementById("mirror1"),
+    div2 = document.getElementById("mirror2"),
+    div3 = document.getElementById('mirror3'),
+    
+    slider1 = document.getElementById("slider1"),
+    slider2 = document.getElementById("slider2"),
+    slider3 = document.getElementById("slider3")
+    
+	document.getElementById("output1").innerHTML = "Deg: "+slider1.value;
+	document.getElementById("output2").innerHTML = "Deg: "+slider2.value;
+	document.getElementById("output3").innerHTML = "Deg: "+slider3.value;
+	
+	
+		
+
+function reset(){
+	div1.style.webkitTransform = 'rotate(0deg)'; 
+    div1.style.mozTransform    = 'rotate(0deg)'; 
+    div1.style.msTransform     = 'rotate(0deg)'; 
+    div1.style.oTransform      = 'rotate(0deg)'; 
+	div1.style.transform       = 'rotate(0deg)';
+	
+	div2.style.webkitTransform = 'rotate(0deg)'; 
+    div2.style.mozTransform    = 'rotate(0deg)'; 
+    div2.style.msTransform     = 'rotate(0deg)'; 
+    div2.style.oTransform      = 'rotate(0deg)'; 
+    div2.style.transform       = 'rotate(0deg)';
+	
+	div3.style.webkitTransform = 'rotate(0deg)'; 
+    div3.style.mozTransform    = 'rotate(0deg)'; 
+    div3.style.msTransform     = 'rotate(0deg)'; 
+    div3.style.oTransform      = 'rotate(0deg)'; 
+    div3.style.transform       = 'rotate(0deg)';
+	
+	slider1.value=0;
+	slider2.value=0;
+	slider3.value=0;
+
+	document.getElementById("output1").innerHTML = "Deg: 0";
+	document.getElementById("output2").innerHTML = "Deg: 0";
+	document.getElementById("output3").innerHTML = "Deg: 0";
+	
+}
+// function listofelements(){
+// 	var list = document.querySelectorAll(".dropzone");
+// 	for(i=0;i<list.length;i++)
+// 	{	
+// 		if(list[i].children.id == "mirror1")
+// 			console.log("YES");
+// 	}
+// 	console.log(list);
+// }
+var flag=0;
+	flag1=0;
+	flag2=0;
+	flag3=0; 
+
+function change(){
+	var i= document.getElementById("mirror1");
+	var list = i.children;
+
+	//console.log("list");
+	//console.log("YES");
+
+	for(i =0 ; i<list.length;i++)
+	{
+		if(list[i].name == "s1" || list[i].name == "s2")
+		{
+			flag=1;
+			console.log("Flag=1");
+			break;
+		} 
+		else flag=0;
+	}
+}
+
+function change1(){
+	var i= document.getElementById("mirror2");
+	var list = i.children;
+
+	//console.log("list");
+	//console.log("YES");
+	
+	for(i =0 ; i<list.length;i++)
+	{
+		if(list[i].name == "m1" || list[i].name == "m2" || list[i].name == "m3")
+		{
+			flag1=1;
+			console.log("Flag1=1");
+			break;
+		} 
+		
+	else flag=0;
+	}
+}
+
+function change2(){
+	var i= document.getElementById("mirror3");
+	var list = i.children;
+
+	//console.log("list");
+	//console.log("YES");
+	
+	for(i =0 ; i<list.length;i++)
+	{
+		if(list[i].name == "m1" || list[i].name == "m2" || list[i].name == "m3")
+		{
+			flag2=1;
+			console.log("Flag2=1");
+			break;
+		} else flag2 = 0;
+	}
+}
+
+function change3(){
+	var i= document.getElementById("object");
+	var list = i.children;
+
+	//console.log("list");
+	//console.log("YES");
+	
+	for(i =0 ; i<list.length;i++)
+	{
+		if(list[i].name == "image_selected")
+		{
+			flag3=1;
+			console.log("Flag3=1");
+			break;
+		} 
+		else flag3 = 0;
+	}
+}
+// window.onload = function(){
+// 	listofelements();
+//}
+function rotate1(){
+    deg = document.getElementById('slider1').value;
+	document.getElementById("output1").innerHTML = "Deg: "+deg;
+    div1.style.webkitTransform = 'rotate('+deg+'deg)'; 
+    div1.style.mozTransform    = 'rotate('+deg+'deg)'; 
+    div1.style.msTransform     = 'rotate('+deg+'deg)'; 
+    div1.style.oTransform      = 'rotate('+deg+'deg)'; 
+    div1.style.transform       = 'rotate('+deg+'deg)'; 
+}
+function rotate2(){
+    deg = document.getElementById('slider2').value;
+	document.getElementById("output2").innerHTML = "Deg: "+deg;
+    div2.style.webkitTransform = 'rotate('+deg+'deg)'; 
+    div2.style.mozTransform    = 'rotate('+deg+'deg)'; 
+    div2.style.msTransform     = 'rotate('+deg+'deg)'; 
+    div2.style.oTransform      = 'rotate('+deg+'deg)'; 
+    div2.style.transform       = 'rotate('+deg+'deg)'; 
+}
+function rotate3(){
+    deg = document.getElementById('slider3').value;
+	document.getElementById("output3").innerHTML = "Deg: "+deg;
+    div3.style.webkitTransform = 'rotate('+deg+'deg)'; 
+    div3.style.mozTransform    = 'rotate('+deg+'deg)'; 
+    div3.style.msTransform     = 'rotate('+deg+'deg)'; 
+    div3.style.oTransform      = 'rotate('+deg+'deg)'; 
+    div3.style.transform       = 'rotate('+deg+'deg)'; 
+}
+var x=0;
+	y=0;
+	z=7;
+	a=-2;
+	x1=0;
+	y1=0;
+	z1=7;
+	a1=-3;
+	x2=0;
+	y2=0;
+	z2=7;
+	a2=-1;
+
+
+function start()
+{
+	anim.setStage(stage);
+    anim.start();	
+}
+
+function stage()
+{
+	//change();
+//	change1();
+//	change2();
+//	change3();
+
+	console.log(flag,flag1,flag2,flag3);
+	if(flag==1 && flag1==1 && flag2==1 && flag3==1)
+	{
+	/*if(slider1.value=="315" && slider2.value=="315" && slider3.value=="135")
+	{
+		if(x<575)
+		{
+			context.beginPath();
+			context.rect(439,238,x,2);
+			context.fillStyle = 'red';
+			context.fill();
+			context.stroke();
+		}
+
+		if(x>188 && x<564)
+		{
+			context.beginPath();
+			context.rect(627,238,2,y);
+			context.fillStyle = 'red';
+			context.fill();
+			context.stroke();
+			y++;
+		}
+
+		if(x>564 && x<945)
+		{
+			context.beginPath();
+			context.rect(627,613,z,2);
+			context.fillStyle = 'red';
+			context.fill();
+			context.stroke();
+
+			context.beginPath();
+			context.rect(1014,238,2,a);
+			context.fillStyle = 'red';
+			context.fill();
+			context.stroke();
+
+			z++;
+			a++;
+		}
+
+		if(x1<562)
+		{
+			context.beginPath();
+			context.rect(439,225,x1,2);
+			context.fillStyle = 'red';
+			context.fill();
+			context.stroke();
+		}
+
+		if(x1>188 && x1<564)
+		{
+			context.beginPath();
+			context.rect(613,225,2,y1);
+			context.fillStyle = 'red';
+			context.fill();
+			context.stroke();
+			y1++;
+		}
+
+		if(x1>564 && x1<945)
+		{
+			context.beginPath();
+			context.rect(614,598,z1,2);
+			context.fillStyle = 'red';
+			context.fill();
+			context.stroke();
+
+			context.beginPath();
+			context.rect(1001,225,2,a1);
+			context.fillStyle = 'red';
+			context.fill();
+			context.stroke();
+
+			z1++;
+			a1++;
+		}
+
+		if(x2<588)
+		{
+			context.beginPath();
+			context.rect(439,251,x2,2);
+			context.fillStyle = 'red';
+			context.fill();
+			context.stroke();
+		}
+
+		if(x2>188 && x2<564)
+		{
+			context.beginPath();
+			context.rect(640,251,2,y2);
+			context.fillStyle = 'red';
+			context.fill();
+			context.stroke();
+			y2++;
+		}
+
+		if(x2>564 && x2<945)
+		{
+			context.beginPath();
+			context.rect(640,626,z2,2);
+			context.fillStyle = 'red';
+			context.fill();
+			context.stroke();
+
+			context.beginPath();
+			context.rect(1027,251,2,a2);
+			context.fillStyle = 'red';
+			context.fill();
+			context.stroke();
+
+			z2++;
+			a2++;
+		}
+			
+		x++;
+		x2++;
+		x1++;
+	}*/
+	if(slider1.value > 300 && slider1.value < 330)
+		{
+			if(slider2.value > 300 && slider2.value <330)
+			{
+						if(x<575)
+						{
+							context.beginPath();
+							context.rect(439,238,x,2);
+							context.fillStyle = 'red';
+							context.fill();
+							context.stroke();
+						}
+
+						if(x>188 && x<564)
+						{
+							context.beginPath();
+							context.rect(627,238,2,y);
+							context.fillStyle = 'red';
+							context.fill();
+							context.stroke();
+							y++;
+						}
+
+						if(x>564 && x<945)
+						{
+							context.beginPath();
+							context.rect(627,613,z,2);
+							context.fillStyle = 'red';
+							context.fill();
+							context.stroke();
+
+							context.beginPath();
+							context.rect(1014,238,2,a);
+							context.fillStyle = 'red';
+							context.fill();
+							context.stroke();
+
+							z++;
+							a++;
+						}
+
+						if(x1<562)
+						{
+							context.beginPath();
+							context.rect(439,225,x1,2);
+							context.fillStyle = 'red';
+							context.fill();
+							context.stroke();
+						}
+
+						if(x1>188 && x1<564)
+						{
+							context.beginPath();
+							context.rect(613,225,2,y1);
+							context.fillStyle = 'red';
+							context.fill();
+							context.stroke();
+							y1++;
+						}
+
+						if(x1>564 && x1<945)
+						{
+							context.beginPath();
+							context.rect(614,598,z1,2);
+							context.fillStyle = 'red';
+							context.fill();
+							context.stroke();
+
+							context.beginPath();
+							context.rect(1001,225,2,a1);
+							context.fillStyle = 'red';
+							context.fill();
+							context.stroke();
+
+							z1++;
+							a1++;
+						}
+
+						if(x2<588)
+						{
+							context.beginPath();
+							context.rect(439,251,x2,2);
+							context.fillStyle = 'red';
+							context.fill();
+							context.stroke();
+						}
+
+						if(x2>188 && x2<564)
+						{
+							context.beginPath();
+							context.rect(640,251,2,y2);
+							context.fillStyle = 'red';
+							context.fill();
+							context.stroke();
+							y2++;
+						}
+
+						if(x2>564 && x2<945)
+						{
+							context.beginPath();
+							context.rect(640,626,z2,2);
+							context.fillStyle = 'red';
+							context.fill();
+							context.stroke();
+
+							context.beginPath();
+							context.rect(1027,251,2,a2);
+							context.fillStyle = 'red';
+							context.fill();
+							context.stroke();
+
+							z2++;
+							a2++;
+						}
+							
+						x++;
+						x2++;
+						x1++;
+				}
+				//document.getElementById("image-formed").style.blur
+		}
+	}
+	
+	else{
+		alert("Please correct the setup first");
+		anim.stop();
+	}
+}
+
+function start1()
+{
+	document.getElementById("tips_box").innerHTML="Hello, <br/> Please Arrange the Setup by dragging the mirrors and beamsplitter to it's correct position. <br/>Then Correct it's angles using sliders. <br/>Finally click on Start animation button to see the experiment. ";
+	
+}
+
+</script>
+
+</body>
+</html>
